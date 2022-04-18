@@ -1,10 +1,17 @@
 package br.com.zup.edu.nossosistemadebares.bar;
 
-import javax.persistence.*;
+import static br.com.zup.edu.nossosistemadebares.bar.StatusOcupacao.LIVRE;
+import static java.time.LocalDateTime.now;
+
 import java.time.LocalDateTime;
 
-import static br.com.zup.edu.nossosistemadebares.bar.StatusOcupacao.*;
-import static java.time.LocalDateTime.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Mesa {
@@ -42,4 +49,19 @@ public class Mesa {
     public Long getId() {
         return id;
     }
+    
+    
+	public void setReservadoPara(String reservadoPara) {
+		this.reservadoPara = reservadoPara;
+	}
+
+	public boolean isReservada() {
+		return this.status == StatusOcupacao.OCUPADO;
+	}
+
+	public void reservar(String reservadoPara) {
+		
+		this.reservadoPara = reservadoPara;
+		this.status = StatusOcupacao.OCUPADO;
+	}
 }
