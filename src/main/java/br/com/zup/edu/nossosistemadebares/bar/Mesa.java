@@ -12,6 +12,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Version;
 
 @Entity
 public class Mesa {
@@ -34,6 +35,9 @@ public class Mesa {
 
     @Column(nullable = false)
     private Integer capacidade;
+    
+    @Version
+    private int versao;
 
     public Mesa(Integer capacidade){
         this.capacidade=capacidade;
@@ -60,7 +64,7 @@ public class Mesa {
 	}
 
 	public void reservar(String reservadoPara) {
-		
+		this.atualizadoEm = now();
 		this.reservadoPara = reservadoPara;
 		this.status = StatusOcupacao.OCUPADO;
 	}
